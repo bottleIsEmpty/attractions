@@ -1,0 +1,93 @@
+CREATE DATABASE attractions;
+
+CREATE TABLE user
+(
+	name VARCHAR (30) NOT NULL,
+	pathronymic VARCHAR (30), 
+	surname VARCHAR (30) NOT NULL,
+	attraction INT NOT NULL,
+	FOREIGN KEY (attraction) REFERENCES attraction(attraction_id)
+);
+
+CREATE TABLE book_genre 
+(
+	book_genre_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	genre VARCHAR (30) NOT NULL
+);
+
+CREATE TABLE author
+(
+	author_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	name VARCHAR (60)
+);
+
+CREATE TABLE book
+(
+	book_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	title VARCHAR (100),
+	genre TINYINT NOT NULL,
+	author TINYINT NOT NULL,
+	year YEAR,
+	score TINYINT (2) NOT NULL,
+	FOREIGN KEY (genre) REFERENCES book_genre(book_genre_id),
+	FOREIGN KEY (author) REFERENCES author(author_id)
+);
+
+CREATE TABLE movie_genre 
+(
+	movie_genre_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	genre VARCHAR (30) NOT NULL
+);
+
+CREATE TABLE director
+(
+	director_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	name VARCHAR (60)
+);
+
+CREATE TABLE movie
+(
+	movie_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	title VARCHAR (100),
+	genre TINYINT NOT NULL,
+	director TINYINT NOT NULL,
+	year YEAR,
+	score TINYINT (2) NOT NULL,
+	FOREIGN KEY (genre) REFERENCES movie_genre(movie_genre_id),
+	FOREIGN KEY (director) REFERENCES director(director_id)
+);
+
+CREATE TABLE music_genre 
+(
+	music_genre_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	genre VARCHAR (30) NOT NULL
+);
+
+CREATE TABLE performer
+(
+	performer_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	name VARCHAR (60)
+);
+
+CREATE TABLE music
+(
+	music_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	title VARCHAR (100),
+	genre TINYINT NOT NULL,
+	performer TINYINT NOT NULL,
+	year YEAR,
+	score TINYINT (2) NOT NULL,
+	FOREIGN KEY (genre) REFERENCES music_genre(music_genre_id),
+	FOREIGN KEY (performer) REFERENCES director(performer_id)
+);
+
+CREATE TABLE attraction
+(
+	attraction_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	book TINYINT NOT NULL, 
+	music TINYINT NOT NULL,
+	movie TINYINT NOT NULL,
+	FOREIGN KEY (book) REFERENCES book(book_id),
+	FOREIGN KEY (music) REFERENCES music(music_id),
+	FOREIGN KEY (movie) REFERENCES movie(movie_id)  
+);

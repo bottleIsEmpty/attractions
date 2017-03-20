@@ -1,0 +1,5 @@
+CREATE TABLE avtor
+(
+	avtor_id INT(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	avtor_name VARCHAR (20) NOT NULL
+);
